@@ -25,15 +25,12 @@ all_sets.forEach(s => {
 });
 console.log('All sets count: ', all_sets.length);
 
+console.log('Odd sets');
 odd_sets = []
 all_sets.forEach(s => {
     if (s.length % 2 == 1) {
+        console.log(s);
         odd_sets.push(s);
     }
-});
-
-console.log('Odd sets');
-odd_sets.forEach(s => {
-    console.log(s);
 });
 console.log('Odd sets count: ', odd_sets.length);
