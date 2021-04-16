@@ -2,13 +2,13 @@
 
 use strict;
 
-my @full_list = ('1', '2', '3', '4', '5');
+my @full_list = qw(1 2 3 4 5);
 my @all_sets = ();
 my $combo_count = 2**scalar(@full_list);
 
 # Build every possible set
 for (my $c = 0; $c < $combo_count; $c++) {
-    print("$c\n");
+    # print("Combination from $c\n");
     my $bincode = '';
     my @newset = ();
     for (my $p = 0; $p < scalar(@full_list); $p++) {
@@ -20,15 +20,19 @@ for (my $c = 0; $c < $combo_count; $c++) {
             $bincode .= '0';
         }
     }
-    print("$bincode\n");
+    # print("Binary version: $bincode\n");
+    # Add a reference to @newset to our master array
     push(@all_sets, \@newset);
 }
 
 print("All sets: \n");
 my @odd_sets = ();
 for my $s (@all_sets) {
+    # We're iterating through an array of references so $s is a
+    # reference, not an actuall array, and we need to dereference it, hence
+    # the @{ $s } syntax. A shorter @$s would work but I prefer the longer
+    # version
     print("{", join(", ", @{ $s }), "}\n");
-    # This is why nobody likes you, Perl.
     if (scalar(@{ $s }) % 2 == 1) {
         push(@odd_sets, $s);
     }
